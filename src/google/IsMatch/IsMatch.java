@@ -1,6 +1,6 @@
 package google.IsMatch;
 
-import static org.junit.Assert.assertEquals;
+//import static org.junit.Assert.assertEquals;
 
 /**
  * Created by mgao on 2018/3/8.
@@ -55,7 +55,7 @@ public class IsMatch {
 //        assertEquals(true, t.isMatch("aa", "a."));
 //        assertEquals(true, t.isMatch("ab", ".*"));
 //        assertEquals(true, t.isMatch("aa", ".*"));
-        assertEquals(true, t.isMatch("aasdf", "aasdf.*"));
+//        assertEquals(true, t.isMatch("aasdf", "aasdf.*"));
 
     }
 }

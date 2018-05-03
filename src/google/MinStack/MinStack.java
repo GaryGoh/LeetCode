@@ -2,7 +2,7 @@ package google.MinStack;
 
 import java.util.Stack;
 
-import static org.junit.Assert.assertEquals;
+//import static org.junit.Assert.assertEquals;
 
 /**
  * MinStack minStack = new MinStack();
@@ -63,10 +63,10 @@ public class MinStack {
         minStack.push(0);
         minStack.push(1);
         minStack.push(0);
-        assertEquals(0, minStack.getMin());
+//        assertEquals(0, minStack.getMin());
         minStack.pop();
-        assertEquals(1, minStack.top());
-        assertEquals(0, minStack.getMin());
+//        assertEquals(1, minStack.top());
+//        assertEquals(0, minStack.getMin());
         System.out.print("done");
     }
 }

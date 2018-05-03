@@ -86,32 +86,32 @@ public class SerializeandDeserializeBinaryTree {
     // Decodes your encoded data to tree.
     public TreeNode deserialize(String data) {
         String[] s = data.split(",");
-//        AtomicInteger index = new AtomicInteger(-1);
-        Integer index = new Integer(- 1);
+        AtomicInteger index = new AtomicInteger(-1);
+//        Integer index = new Integer(- 1);
         return dfsBuild(s, index);
     }
 
-//    private TreeNode dfsBuild(String[] data, AtomicInteger index) {
-//        index.incrementAndGet();
-//        if (data[index.get()].equals("null")) {
-//            return null;
-//        }
-//        TreeNode cur = new TreeNode(Integer.parseInt(data[index.get()]));
-//        cur.left = dfsBuild(data, index);
-//        cur.right = dfsBuild(data, index);
-//        return cur;
-//    }
-
-    private TreeNode dfsBuild(String[] data, Integer index) {
-        index ++;
-        if (data[index].equals("null")) {
+    private TreeNode dfsBuild(String[] data, AtomicInteger index) {
+        index.incrementAndGet();
+        if (data[index.get()].equals("null")) {
             return null;
         }
-        TreeNode cur = new TreeNode(Integer.parseInt(data[index]));
+        TreeNode cur = new TreeNode(Integer.parseInt(data[index.get()]));
         cur.left = dfsBuild(data, index);
         cur.right = dfsBuild(data, index);
         return cur;
     }
+
+//    private TreeNode dfsBuild(String[] data, Integer index) {
+//        index ++;
+//        if (data[index].equals("null")) {
+//            return null;
+//        }
+//        TreeNode cur = new TreeNode(Integer.parseInt(data[index]));
+//        cur.left = dfsBuild(data, index);
+//        cur.right = dfsBuild(data, index);
+//        return cur;
+//    }
 
     public static void main(String[] args) {
         SerializeandDeserializeBinaryTree s = new SerializeandDeserializeBinaryTree();

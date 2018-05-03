@@ -1,6 +1,6 @@
 package LeetCode;
 
-import org.junit.Assert;
+//import org.junit.Assert;
 
 /**
  * Say you have an array for which the ith element is the price of a given stock on day i.
@@ -59,10 +59,10 @@ public class BestTimetoBuyandSellStockII {
         int[] p2 = {1,2,3,4,5};
         int[] p3 = {7,6,4,3,1};
         int[] p4 = {2,1,4,5,2,9,7};
-        Assert.assertEquals(7, b.maxProfit(p1));
-        Assert.assertEquals(4, b.maxProfit(p2));
-        Assert.assertEquals(0, b.maxProfit(p3));
-        Assert.assertEquals(11, b.maxProfit(p4));
+//        Assert.assertEquals(7, b.maxProfit(p1));
+//        Assert.assertEquals(4, b.maxProfit(p2));
+//        Assert.assertEquals(0, b.maxProfit(p3));
+//        Assert.assertEquals(11, b.maxProfit(p4));
 
     }
 }
