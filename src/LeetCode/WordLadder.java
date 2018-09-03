@@ -83,9 +83,14 @@ public class WordLadder {
 
     public static void main(String[] args) {
         WordLadder w = new WordLadder();
-        String b = "a";
-        String e = "c";
-        String[] sa = {"a","b", "c"};
+//        String b = "a";
+//        String e = "c";
+//        String[] sa = {"a","b", "c"};
+
+        String b = "hit";
+        String e = "cog";
+        String[] sa = {"hot","dot","dog","lot","log","cog"};
+
         List<String> l1 = new ArrayList<>();
         for (String s : sa) {
             l1.add(s);
