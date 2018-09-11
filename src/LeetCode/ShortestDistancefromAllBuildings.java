@@ -39,9 +39,13 @@ public class ShortestDistancefromAllBuildings {
     public int shortestDistance(int[][] grid) {
         boolean[][] visited = new boolean[grid.length][grid[0].length];
         int res = Integer.MAX_VALUE;
-
+        int numBuildings = 0;
+        int[][] nums = new int[grid.length][grid[0].length];
         for (int i = 0; i < grid.length; i ++) {
             for (int j = 0; j < grid[0].length; j ++) {
+                if (grid[i][j] == 1) {
+                    numBuildings ++;
+                }
                 grid[i][j] *= -1;
             }
         }
@@ -49,27 +53,27 @@ public class ShortestDistancefromAllBuildings {
         for (int i = 0; i < grid.length; i ++) {
             for (int j = 0; j < grid[0].length; j ++) {
                 if (grid[i][j] == -1) {
-                    bfsUpdateDist(grid, i, j);
+                    bfsUpdateDist(grid, i, j,nums);
                 }
             }
         }
 
         for (int i = 0; i < grid.length; i ++) {
             for (int j = 0; j < grid[0].length; j ++) {
-                if (grid[i][j] > 0) {
+                if (grid[i][j] > 0 && nums[i][j] == numBuildings) {
                     res = Math.min(grid[i][j], res);
                 }
             }
         }
-        System.out.println(Arrays.deepToString(grid));
         return (res == Integer.MAX_VALUE) ? -1: res;
     }
 
-    private void bfsUpdateDist(int[][] grid, int row, int column) {
+    private void bfsUpdateDist(int[][] grid, int row, int column, int[][]nums) {
         Queue<int[]> queue = new LinkedList();
         int m = grid.length;
         int n = grid[0].length;
         boolean[][] visited = new boolean[m][n];
+        int[][] dists = new int[m][n];
         queue.add(new int[]{row, column});
 
         while (!queue.isEmpty()) {
@@ -83,7 +87,13 @@ public class ShortestDistancefromAllBuildings {
                     int newRow = curRow + rMove[i];
                     int newColumn = curColumn + cMove[i];
                     if (isSafe(grid, newRow, newColumn, m, n, visited)) {
-                        grid[newRow][newColumn] += 1;
+                        int priorDist = 0;
+                        if (dists[curRow][curColumn] > 0) {
+                            priorDist = dists[curRow][curColumn];
+                        }
+                        dists[newRow][newColumn] = priorDist + 1;
+                        grid[newRow][newColumn] += dists[newRow][newColumn];
+                        nums[newRow][newColumn] ++;
                         visited[newRow][newColumn] = true;
                         queue.add(new int[]{newRow, newColumn});
                     }
@@ -93,9 +103,7 @@ public class ShortestDistancefromAllBuildings {
     }
 
     private boolean isSafe(int [][] gird, int x, int y, int m, int n, boolean[][] visited) {
-        if (x < 0 || x > m - 1 || y < 0 || y > n - 1 || visited[x][y]) {
-            return false;
-        } else if (gird[x][y] == -2 || gird[x][y] == -1) {
+        if (x < 0 || x > m - 1 || y < 0 || y > n - 1 || visited[x][y] || gird[x][y] < 0) {
             return false;
         }
         return true;
@@ -103,7 +111,8 @@ public class ShortestDistancefromAllBuildings {
 
     public static void main(String[] args) {
         ShortestDistancefromAllBuildings s = new ShortestDistancefromAllBuildings();
-        int[][] i = {{1,0,2,0,1},{0,0,0,0,0},{0,0,1,0,0}};
+//        int[][] i = {{1,0,2,0,1},{0,0,0,0,0},{0,0,1,0,0}};
+        int[][] i = {{0,2,1},{1,0,2},{0,1,0}};
         System.out.println(s.shortestDistance(i));
     }
 }
