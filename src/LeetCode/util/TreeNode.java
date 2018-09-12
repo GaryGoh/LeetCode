@@ -37,8 +37,8 @@ public class TreeNode {
             }
 
             if (i % 2 != 0) {
-                if (xs[i] != null){
-                    cur.left = new TreeNode(xs[i]);
+                if (xs[i-1] != null){
+                    cur.left = new TreeNode(xs[i-1]);
                     queue.offer(cur.left);
                 } else {
                     queue.offer(null);
@@ -47,8 +47,8 @@ public class TreeNode {
             }
 
             if (i % 2 == 0) {
-                if (xs[i] != null){
-                    cur.right = new TreeNode(xs[i]);
+                if (xs[i-1] != null){
+                    cur.right = new TreeNode(xs[i-1]);
                     queue.offer(cur.right);
                 } else {
                     queue.offer(null);
