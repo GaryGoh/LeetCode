@@ -36,7 +36,7 @@ public class WallsandGates {
     int[] rMove = {-1, 0, 1, 0};
     int[] cMove = {0, -1, 0, 1};
 
-    public void wallsAndGates(int[][] rooms) {
+    public void wallsAndGates1(int[][] rooms) {
         if (rooms == null || rooms[0].length == 0) {
             return;
         }
@@ -102,13 +102,67 @@ public class WallsandGates {
         return true;
     }
 
+    public void wallsAndGates2(int[][] rooms) {
+        if (rooms == null || rooms.length == 0) {
+            return;
+        }
+
+        for (int i = 0; i < rooms.length; i++) {
+            for (int j = 0; j < rooms[0].length; j++) {
+                if (rooms[i][j] == 0) {
+                    helper(rooms,i, j,0);
+                }
+            }
+        }
+    }
+
+    private void helper(int[][] rooms, int x, int y, int val) {
+        if (x < 0 || x > rooms.length - 1 || y < 0 || y > rooms[0].length - 1 || rooms[x][y] < val) {
+            return;
+        }
+        rooms[x][y] = val;
+        helper(rooms, x - 1, y, val + 1);
+        helper(rooms, x + 1, y, val + 1);
+        helper(rooms, x, y - 1, val + 1);
+        helper(rooms, x, y + 1, val + 1);
+    }
+
+    public void wallsAndGates(int[][] rooms) {
+        if (rooms == null || rooms.length == 0) {
+            return;
+        }
+        Queue<int[]> queue = new LinkedList<>();
+        for (int i = 0; i < rooms.length; i ++) {
+            for (int j = 0; j < rooms[0].length; j ++) {
+                if (rooms[i][j] == 0) {
+                    queue.offer(new int[]{i, j});
+                }
+            }
+        }
+
+        while (!queue.isEmpty()) {
+            int[] cur = queue.poll();
+            int curX = cur[0];
+            int curY = cur[1];
+            for (int k = 0; k < 4; k ++) {
+                int newX = curX + rMove[k];
+                int newY = curY + cMove[k];
+                if (newX < 0 || newY < 0 || newX > rooms.length - 1 || newY > rooms[0].length - 1 || rooms[newX][newY] < rooms[curX][curY]  + 1) {
+                    continue;
+                }
+                rooms[newX][newY] = rooms[curX][curY] + 1;
+                queue.offer(new int[]{newX, newY});
+            }
+        }
+    }
+
     public static void main(String[] args) {
         WallsandGates w = new WallsandGates();
-//        int[][] i = {{2147483647, -1, 0, 2147483647},
-//                {2147483647, 2147483647, 2147483647, -1},
-//                {2147483647, -1, 2147483647, -1},
-//                {0, -1, 2147483647, 2147483647}};
-        int[][] i = null;
+        int[][] i = {{2147483647, -1, 0, 2147483647},
+                {2147483647, 2147483647, 2147483647, -1},
+                {2147483647, -1, 2147483647, -1},
+                {0, -1, 2147483647, 2147483647}};
+//        int[][] i = null;
         w.wallsAndGates(i);
         System.out.println(Arrays.deepToString(i));
 
