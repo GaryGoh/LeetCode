@@ -1,8 +1,6 @@
 package LeetCode;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * You want to build a house on an empty land which reaches all buildings in the shortest amount of distance. You can only move up, down, left and right. You are given a 2D grid of values 0, 1 or 2, where:
@@ -195,8 +193,23 @@ public class ShortestDistancefromAllBuildings {
 
     public static void main(String[] args) {
         ShortestDistancefromAllBuildings s = new ShortestDistancefromAllBuildings();
-        int[][] i = {{1, 0, 2, 0, 1}, {0, 0, 0, 0, 0}, {0, 0, 1, 0, 0}};
-//        int[][] i = {{0,2,1},{1,0,2},{0,1,0}};
-        System.out.println(s.shortestDistance2(i));
+//        int[][] i = {{1,0,2,0,1},{0,0,0,0,0},{0,0,1,0,0}};
+        int[][] i = {{0,2,1},{1,0,2},{0,1,0}};
+//        System.out.println(s.shortestDistance(i));
+
+        String[] s1 = {"a", "b"};
+        String[] s2 = s1;
+        System.out.println(s2[0]);
+
+        List<String> list = new ArrayList();
+        String s3 = "a";
+        String s4 = "b";
+        list.add(s3);
+        list.add(s4);
+        System.out.println(list);
+
+        list.remove(s4);
+        list.add(0, s4);
+        System.out.println(list);
     }
 }
