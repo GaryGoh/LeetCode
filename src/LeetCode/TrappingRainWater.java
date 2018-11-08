@@ -1,5 +1,7 @@
 package LeetCode;
 
+import org.junit.Assert;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,6 +19,39 @@ import java.util.stream.Collectors;
  */
 
 public class TrappingRainWater {
+
+    /**
+     * slow-fast 2 pointers.
+     * 1. use the lower one to cal the res,
+     *  if (h.left > h.right):
+     *      rightMax = max(rightMax, h.right);
+     *      res += rightMax - h.right
+     *      right --;
+     *  else
+     *      leftMax = max(leftMax, h.left);
+     *      res += leftMax - h.left
+     *
+     *  loop util (left >= right)
+     */
+    public int trap(int[] height) {
+        int res = 0;
+        int left = 0;
+        int right = height.length - 1;
+        int leftMax = 0;
+        int rightMax = 0;
+
+        while (left < right) {
+            if (height[left] > height[right]) {
+                rightMax = Math.max(rightMax, height[right]);
+                res += rightMax - height[right--];
+            } else {
+                leftMax = Math.max(leftMax, height[left]);
+                res += leftMax - height[left++];
+            }
+        }
+        return res;
+    }
+
     public int trap1(int[] height) {
         int res = 0;
         int len;
@@ -35,7 +70,7 @@ public class TrappingRainWater {
         return res;
     }
 
-    public int trap(int[] height) {
+    public int trap2(int[] height) {
         int res = 0;
         int left = 0, right = height.length - 1;
         int leftMax = 0, rightMax = 0;
@@ -54,13 +89,20 @@ public class TrappingRainWater {
 
     public static void main(String[] args) {
         TrappingRainWater t = new TrappingRainWater();
-        int[] n = {0,1,0,2,1,0,1,3,2,1,2,1};
-//        int[] n = {0, 0, 0};
+        int[] n1 = {0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1};
+        int[] n2 = {0, 2, 0};
+        int[] n3 = {2, 0, 2};
+        int[] n4 = {4, 2, 3};
+
 
 //        List<Integer> helper = Arrays.stream(n).boxed().collect(Collectors.toList());
 //        System.out.println(helper.get(0));
 //        helper.remove(0);
 //        System.out.println(helper.get(0));
-        System.out.println(t.trap(n));
+//        System.out.println(t.trap(n));
+        Assert.assertEquals(t.trap2(n1), t.trap(n1));
+        Assert.assertEquals(t.trap2(n2), t.trap(n2));
+        Assert.assertEquals(t.trap2(n3), t.trap(n3));
+        Assert.assertEquals(t.trap2(n4), t.trap(n4));
     }
 }
