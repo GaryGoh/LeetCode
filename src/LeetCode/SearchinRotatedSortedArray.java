@@ -22,23 +22,17 @@ package LeetCode;
  */
 
 public class SearchinRotatedSortedArray {
-    public boolean search(int[] nums, int target) {
-
+    public int search(int[] nums, int target) {
         int left = 0;
         int right = nums.length - 1;
 
         while (left <= right) {
             int mid = left + (right - left) / 2;
             if (nums[mid] == target) {
-                return true;
+                return mid;
             }
 
-            if (nums[left] == nums[mid]) {
-                left ++;
-                continue;
-            }
-
-            if (nums[left] < nums[mid]) {
+            if (nums[left] <= nums[mid]) {
                 if (target >= nums[left] && target <= nums[mid]) {
                     right = mid - 1;
                 } else {
@@ -52,12 +46,12 @@ public class SearchinRotatedSortedArray {
                 }
             }
         }
-        return false;
+        return -1;
     }
 
     public static void main(String[] args) {
-        int[] i = {3,1,1,1};
-        int target = 3;
+        int[] i = {2,5,6,0,0,1,2};
+        int target = 0  ;
         SearchinRotatedSortedArray s = new SearchinRotatedSortedArray();
         System.out.println(s.search(i, target));
 
